@@ -15,6 +15,7 @@ public class Item {
     private String shortDescription;
     @Column(length = 1024)
     private String description;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -54,5 +55,13 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

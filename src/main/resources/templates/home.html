@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-white jumbo-container">
+            <h1 class="display-3">Foodie</h1>
+            <p>Welcome in our restaurant. You can order what You want and how much You want and we will do it for
+                You.</p>
+        </div>
+    </div>
+    <div th:remove="all-but-first">
+        <div class="media col-6 offset-3" th:each="item: ${items}">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#" th:href="@{|/dish/${#strings.replace(item.name, ' ', '-')}|}">
+                    <h5 th:text="|${item.name}(${item.price}zł)|">Pizza Margherita (25zł)</h5>
+                </a>
+                <p th:text="${item.shortDescription}">Short description pizza margherita, delicious classic on thin
+                    crust and melt cheese.</p>
+            </div>
+        </div>
+        <div class="media col-6 offset-3">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#">
+                    <h5>Pizza Capriciosa (26zł)</h5>
+                </a>
+                <p>Short description pizza margherita, delicious classic on thin crust and melt cheese.</p>
+            </div>
+        </div>
+        <div class="media col-6 offset-3">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#">
+                <h5>Pizza Mafioso (27zł)</h5>
+                </a>
+                <p>Short description pizza margherita, delicious classic on thin crust and melt cheese.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${item.name}">Pizza Margherita</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-8 offset-lg-2">
+        <img src="../static/img/pizza-margherita.jpg" th:src="@{${item.imageUrl}}" class="img-fluid" alt="Pizza margherita"/>
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <h1 class="text-center" th:text="${item.name}">Pizza margherita</h1>
+            <h3 class="text-center" th:text="|Price: ${item.price}|">Cena: 25zł</h3>
+            <p class="text-justify" th:text="${item.description}">Pizza Margherita to klasyka włoskiej kuchni. W naszym wydaniu serwujemy pizzę na cienkim cieście z
+                ręcznie przygotowanym sosem pomidorowym i oryginalnym serem mozarella</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
