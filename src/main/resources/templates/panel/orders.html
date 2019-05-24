@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-white jumbo-container">
+            <h1 class="display-3">Orders</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center mb-2">
+                <a href="#" th:href="@{/panel/orders(status=${T(pl.karol.foodieapp.order.OrderStatus).NEW.name()})}"
+                   class="btn btn-warning mx-1">New</a>
+                <a href="#"
+                   th:href="@{/panel/orders(status=${T(pl.karol.foodieapp.order.OrderStatus).IN_PROGRESS.name()})}"
+                   class="btn btn-primary mx-1">In progress</a>
+                <a href="#"
+                   th:href="@{/panel/orders(status=${T(pl.karol.foodieapp.order.OrderStatus).COMPLETE.name()})}"
+                   class="btn btn-success mx-1">Complete</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2" th:if="${!orders.isEmpty()}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Edit</th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each="order: ${orders}">
+                    <th scope="row" th:text="${order.id}">1</th>
+                    <td th:text="${order.address}">ul. Krakowska 43/22, 53-320 Wrocław</td>
+                    <td th:text="${order.telephone}">111-222-333</td>
+                    <th:block th:switch="${order.status}">
+                        <td th:case="${T(pl.karol.foodieapp.order.OrderStatus).NEW}">New</td>
+                        <td th:case="${T(pl.karol.foodieapp.order.OrderStatus).IN_PROGRESS}">In progress</td>
+                        <td th:case="${T(pl.karol.foodieapp.order.OrderStatus).COMPLETE}">Complete</td>
+                    </th:block>
+                    <td>
+                        <a href="#" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>ul. Jaglana 22/11</td>
+                    <td>898-787-676</td>
+                    <td>In progress</td>
+                    <td><a href="#" class="btn btn-primary">Edytuj</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>ul Kazimierza Wielkiego, 50-300 Wrocław</td>
+                    <td>666-777-888</td>
+                    <td>Complete</td>
+                    <td><a href="#" class="btn btn-primary">Edytuj</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${orders.isEmpty()}" class="text-center">
+            <h2>There is any order yet</h2>
+        </div>
+    </div>
+</div>
+</body>
+</html>
