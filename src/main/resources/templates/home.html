@@ -15,6 +15,7 @@
             <h1 class="display-3">Foodie</h1>
             <p>Welcome in our restaurant. You can order what You want and how much You want and we will do it for
                 You.</p>
+            <a th:href="@{/order}">Orders</a>
         </div>
     </div>
     <div th:remove="all-but-first">
@@ -26,6 +27,9 @@
                 </a>
                 <p th:text="${item.shortDescription}">Short description pizza margherita, delicious classic on thin
                     crust and melt cheese.</p>
+                <a href="#" th:href="@{/order/add(itemId=${item.id})}" class="btn btn-sm btn-primary">
+                    Add order
+                </a>
             </div>
         </div>
         <div class="media col-6 offset-3">

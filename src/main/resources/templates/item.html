@@ -17,6 +17,9 @@
             <h3 class="text-center" th:text="|Price: ${item.price}|">Cena: 25zł</h3>
             <p class="text-justify" th:text="${item.description}">Pizza Margherita to klasyka włoskiej kuchni. W naszym wydaniu serwujemy pizzę na cienkim cieście z
                 ręcznie przygotowanym sosem pomidorowym i oryginalnym serem mozarella</p>
+            <a href="#" th:href="@{/order/add(itemId=${item.id})}" class="btn btn-primary d-block">
+                Add to order
+            </a>
         </div>
     </div>
 </div>
