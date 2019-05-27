@@ -52,7 +52,7 @@
                         <td th:case="${T(pl.karol.foodieapp.order.OrderStatus).COMPLETE}">Complete</td>
                     </th:block>
                     <td>
-                        <a href="#" class="btn btn-primary">Edit</a>
+                        <a href="#" th:href="@{|/panel/order/${order.id}|}"class="btn btn-primary">Edit</a>
                     </td>
                 </tr>
                 <tr>

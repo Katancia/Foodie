@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "client_order")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany
     @JoinTable(name = "order_item",

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|Order ${order.id}|">Order 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-white jumbo-container">
+            <h1 th:text="|Order ${order.id}|" class="display-3">Order 1</h1>
+            <th:block th:switch="${order.status}">
+                <h2 th:case="${T(pl.karol.foodieapp.order.OrderStatus).NEW}">Status: New</h2>
+                <h2 th:case="${T(pl.karol.foodieapp.order.OrderStatus).IN_PROGRESS}">Status: In progress</h2>
+                <h2 th:case="${T(pl.karol.foodieapp.order.OrderStatus).COMPLETE}">Status: Complete</h2>
+            </th:block>
+            <a href="#" th:href="@{/panel/orders}">Orders</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3" th:if="${!order.items.isEmpty()}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each="item, idx: ${order.items}">
+                    <th scope="row" th:text="${idx.index+1}">1</th>
+                    <td th:text="${item.name}">Pizza margherita</td>
+                    <td th:text="|${item.price}zł|">25zł</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Spaghetti Bolognese</td>
+                    <td>23zł</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Panna Cotta</td>
+                    <td>17zł</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="text-right">
+                <h5 th:text="|To pay: ${#numbers.formatDecimal(sum,1,2,'COMMA')}zł|">To pay: 99.99zł</h5>
+            </div>
+            <div class="text-center" th:if="${order.status != T(pl.karol.foodieapp.order.OrderStatus).COMPLETE}">
+                <form action="#" th:action="@{|/panel/order/${order.id}|}" method="post">
+                    <button class="btn btn-primary" th:if="${order.status == T(pl.karol.foodieapp.order.OrderStatus).NEW}">
+                        Realize
+                    </button>
+                    <button class="btn btn-success" th:if="${order.status == T(pl.karol.foodieapp.order.OrderStatus).IN_PROGRESS}">
+                        Complete
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-12">
+            <div th:if="${order.items.isEmpty()}" class="text-center">
+                <h2>Order is empty</h2>
+                <a href="#" th:href="@{/panel/orders}">Back to orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
